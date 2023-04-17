@@ -44,7 +44,7 @@ MP4, WEbM, 3Gp & Flv Video Converter API Code:
 **Generate like this...**  
 ![Button API](https://assets.vevioz.com/img/widget.png)
 
-<ins>Javascript code for automatically resizing (optional)</ins>
+<ins>Javascript code for iframe automatically resizing (Optional)</ins>
 
 ```<!-- Put the Library in your <head> tag -->```
 
