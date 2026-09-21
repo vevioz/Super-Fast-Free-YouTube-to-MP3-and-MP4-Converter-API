@@ -1,62 +1,106 @@
-# Super Fast YouTube to MP3/MP4 Converter API
+# Vevioz Downloader API — MP3/MP4 Video Downloader API
 
-Try YouTube to MP3 & MP4 Converter API JSON, Python, JavaScript, iFrame, PHP, Node.JS, Swift, React, Android & iOS Video Downloader API.
+**Official API:** https://api.vevioz.com/  
+**Service status:** https://api.vevioz.com/status
 
-A simple way to convert Youtube videos to mp3/mp4 using API service. Get quality like 320 kbps, 256 kbps, 192 kbps, 128 kbps mp3 & video format for all devices.  
+Vevioz Downloader API provides a public integration layer for websites and applications that need video metadata, available formats, MP3 audio, MP4 video, download jobs, or a ready-made downloader interface.
 
-APIs works with any programming language like PHP, Python, JavaScript, jQuery, Ajax, JSON, Node.JS, Swift, C++, C#, Java, Android & iOS. 
+**Version 1 is live.**
 
-Converter Developer API supports YouTube, SoundCloud, Facebook, Twitter, Instagram, TikTok, Vimeo, Dailymotion, VK & AOL Video platforms.
+## Integration options
 
-<ins>Available type</ins>
+- **Responsive iframe** — fastest way to add the complete downloader UI.
+- **JavaScript Button SDK** — renders formats, verification, progress, and the final file link directly on your page.
+- **REST API** — structured JSON endpoints for custom websites, apps, and workflows.
 
-mp3 = MP3
+## JavaScript Button SDK
 
-videos = MP4
+```html
+<button id="download" type="button">Download MP3/MP4</button>
 
-merged = WEBM / MKV
+<script src="https://api.vevioz.com/static/vevioz-download-button.js?v=6"></script>
+<script>
+  VeviozDownloadButton.bind(document.getElementById("download"), {
+    url: "https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID"
+  });
+</script>
+```
 
-Please replace YouTube-Video-ID with dynamic video id value.
+## Responsive iframe
 
-**Warning:** API does not work if used with **"sandbox"** iFrame attribute. Your Domain/IP will be blocked.   
-ex: ~~<iframe sandbox="allow-scripts allow-same-origin"...~~
+```html
+<iframe
+  id="vevioz-api"
+  src="https://api.vevioz.com/YOUTUBE_VIDEO_ID"
+  title="Vevioz Downloader"
+  loading="lazy"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allow="clipboard-write"
+  sandbox="allow-scripts allow-forms allow-downloads allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+  style="width:100%;height:720px;border:0">
+</iframe>
 
-<ins>MP3 Download button iFrame example</ins> 
+<script>
+window.addEventListener("message", function (event) {
+  var frame = document.getElementById("vevioz-api");
+  if (event.origin !== "https://api.vevioz.com" || event.source !== frame.contentWindow) return;
 
-```<iframe src="https://api.vevioz.com/api/button/mp3/iiMrs3vOm_w" width="100%" height="100%" allowtransparency="true" scrolling="no" style="border:none"></iframe>```
+  if (event.data.type === "vevioz-api-resize") {
+    frame.style.height = Math.min(1800, Math.max(320, event.data.height)) + "px";
+  }
 
-**Generate like this...**  
-![Button API](https://assets.vevioz.com/img/mp3.png)  
+  if (event.data.type === "vevioz-api-capabilities-request") {
+    event.source.postMessage({
+      type: "vevioz-api-capabilities",
+      sandbox: frame.hasAttribute("sandbox") ? Array.from(frame.sandbox) : null
+    }, event.origin);
+  }
 
-MP4, WEbM, 3Gp & Flv Video Converter API Code:
+  if (event.data.type === "vevioz-api-download" && typeof event.data.url === "string") {
+    var download = new URL(event.data.url, "https://api.vevioz.com");
+    if (
+      download.origin === "https://api.vevioz.com" &&
+      download.pathname.indexOf("/api/v1/files/") === 0
+    ) {
+      window.location.assign(download.href);
+    }
+  }
+});
+</script>
+```
 
-<ins>MP4 Download button iFrame example</ins>
+## REST API v1
 
-```<iframe src="https://api.vevioz.com/api/button/videos/iiMrs3vOm_w" width="100%" height="100%" allowtransparency="true" scrolling="no" style="border:none"></iframe>```
+Current public endpoints:
 
-**Generate like this...**  
-![Button API](https://assets.vevioz.com/img/mp4.png)
+```text
+GET  /api/v1/info?url=YOUTUBE_URL
+POST /api/v1/jobs
+GET  /api/v1/jobs/{job_id}?token=ACCESS_TOKEN
+GET  /api/v1/status
+```
 
-<ins>Widget button API</ins>
+Typical workflow:
 
-```<iframe src="https://api.vevioz.com/api/widget/mp3/iiMrs3vOm_w" width="100%" height="100%" allowtransparency="true" scrolling="no" style="border:none"></iframe>```
+1. Read video metadata and available formats with `/api/v1/info`.
+2. Create a download job with `/api/v1/jobs`.
+3. Poll the job endpoint until the secure file URL is ready.
 
-**Generate like this...**  
-![Button API](https://assets.vevioz.com/img/widget.png)
+The API returns the formats available for the selected video; applications should display only the formats returned by the metadata response.
 
-<ins>Javascript code for iframe automatically resizing (Optional)</ins>
+## Why use Vevioz API?
 
-```<!-- Put the Library in your <head> tag -->```
+- First-party infrastructure operated by Vevioz.
+- MP3 audio and MP4 video support.
+- Responsive embed for fast integrations.
+- REST endpoints for custom front ends.
+- Metadata caching, bounded workers, automatic cleanup, and explicit error handling.
+- Public service-status page.
 
-```script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"></script>```
+## Links
 
-```<!-- Put the resizer code after your <iframe> tag -->```
+- **Official Vevioz Downloader API:** https://api.vevioz.com/
+- **API status:** https://api.vevioz.com/status
+- **Vevioz:** https://www.vevioz.com/
 
-```<script>iFrameResize({ log: false, minHeight: 360 }, '#buttonApi')</script>```
-
-Please write to us for any query or support : admin@vevioz.com
-
-Official API Websites: 
-https://api.vevioz.com/developers
-
-Demo: https://addons.vevioz.com
+Use the service only for media you are authorized to access or download and comply with applicable platform terms and laws.
