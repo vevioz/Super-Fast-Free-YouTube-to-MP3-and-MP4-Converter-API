@@ -1,37 +1,44 @@
-## Welcome to GitHub Pages
+---
+layout: default
+title: Vevioz Downloader API
+description: Official Vevioz MP3/MP4 downloader API integration examples for iframe, JavaScript SDK and REST API.
+---
 
-You can use the [editor on GitHub](https://github.com/youtubetomp3converterapi/Fast-YouTube-to-MP3-Converter-API/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# Vevioz Downloader API
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The current Vevioz API is available at **[api.vevioz.com](https://api.vevioz.com/)**.
 
-### Markdown
+Vevioz provides three integration paths for developers:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+1. **Responsive downloader iframe** for the fastest implementation.
+2. **JavaScript Button SDK** for an inline MP3/MP4 download experience.
+3. **REST API v1** for custom applications and front ends.
 
-```markdown
-Syntax highlighted code block
+## REST API v1
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```text
+GET  https://api.vevioz.com/api/v1/info?url=YOUTUBE_URL
+POST https://api.vevioz.com/api/v1/jobs
+GET  https://api.vevioz.com/api/v1/jobs/{job_id}?token=ACCESS_TOKEN
+GET  https://api.vevioz.com/api/v1/status
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Quick JavaScript integration
 
-### Jekyll Themes
+```html
+<button id="download" type="button">Download MP3/MP4</button>
+<script src="https://api.vevioz.com/static/vevioz-download-button.js?v=6"></script>
+<script>
+VeviozDownloadButton.bind(document.getElementById("download"), {
+  url: "https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID"
+});
+</script>
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/youtubetomp3converterapi/Fast-YouTube-to-MP3-Converter-API/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Official resources
 
-### Support or Contact
+- **[Open Vevioz Downloader API](https://api.vevioz.com/)**
+- **[Check API status](https://api.vevioz.com/status)**
+- **[Visit Vevioz](https://www.vevioz.com/)**
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+For the latest integration instructions, examples, formats, and API behavior, use the official API website above.
