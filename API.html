@@ -1,11 +1,59 @@
-<!-- YouTube to MP3 Converter API embed code  -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Vevioz Downloader API Demo — MP3/MP4</title>
+  <meta name="description" content="Live Vevioz Downloader API iframe integration demo for MP3 audio and MP4 video.">
+</head>
+<body>
+  <main style="max-width:960px;margin:40px auto;padding:0 16px;font-family:system-ui,sans-serif">
+    <h1>Vevioz Downloader API</h1>
+    <p>
+      Official API and documentation:
+      <a href="https://api.vevioz.com/">https://api.vevioz.com/</a>
+    </p>
 
-<iframe src="https://api.vevioz.com/api/button/mp3/iiMrs3vOm_w" width="100%" height="100%" allowtransparency="true" scrolling="no" style="border:none"></iframe>
+    <iframe
+      id="vevioz-api"
+      src="https://api.vevioz.com/YOUTUBE_VIDEO_ID"
+      title="Vevioz Downloader"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="clipboard-write"
+      sandbox="allow-scripts allow-forms allow-downloads allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+      style="width:100%;height:720px;border:0">
+    </iframe>
 
-<br />
+    <p><a href="https://api.vevioz.com/status">Vevioz API status</a></p>
+  </main>
 
-<!-- YouTube to MP4/Video Converter API embed code  -->
+  <script>
+  window.addEventListener("message", function (event) {
+    var frame = document.getElementById("vevioz-api");
+    if (event.origin !== "https://api.vevioz.com" || event.source !== frame.contentWindow) return;
 
-<iframe src="https://api.vevioz.com/api/button/videos/iiMrs3vOm_w" width="100%" height="100%" allowtransparency="true" scrolling="no" style="border:none"></iframe>
+    if (event.data.type === "vevioz-api-resize") {
+      frame.style.height = Math.min(1800, Math.max(320, event.data.height)) + "px";
+    }
 
-<!-- Pleasse replace pRpeEdMmmQ0 with your own YouTube Video ID -->
+    if (event.data.type === "vevioz-api-capabilities-request") {
+      event.source.postMessage({
+        type: "vevioz-api-capabilities",
+        sandbox: frame.hasAttribute("sandbox") ? Array.from(frame.sandbox) : null
+      }, event.origin);
+    }
+
+    if (event.data.type === "vevioz-api-download" && typeof event.data.url === "string") {
+      var download = new URL(event.data.url, "https://api.vevioz.com");
+      if (
+        download.origin === "https://api.vevioz.com" &&
+        download.pathname.indexOf("/api/v1/files/") === 0
+      ) {
+        window.location.assign(download.href);
+      }
+    }
+  });
+  </script>
+</body>
+</html>
