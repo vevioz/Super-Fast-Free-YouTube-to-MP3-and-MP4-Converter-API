@@ -7,6 +7,17 @@ Vevioz Downloader API provides a public integration layer for websites and appli
 
 **Version 1 is live.**
 
+## 🎵 Download Lagu MP3 — live consumer service
+
+Prefer a ready-to-use web experience instead of integrating the API yourself?
+
+**➡️ https://download-lagu-mp3.com/**
+
+Download Lagu MP3 is a consumer-facing Vevioz service for discovering available MP3/MP4 download options from supported media URLs. It is the easiest way to try the downloader experience without writing code.
+
+Use the service only for media you are authorized to access or download and comply with applicable platform terms and laws.
+
+
 ## Integration options
 
 - **Responsive iframe** — fastest way to add the complete downloader UI.
