@@ -7,6 +7,13 @@ Vevioz Downloader API provides a public integration layer for websites and appli
 
 **Version 1 is live.**
 
+## 🌐 Vevioz Enterprise — social network & digital community
+
+Explore the main Vevioz platform for profiles, community publishing, discovery, blogs, forums, marketplace, and other social features.
+
+**➡️ https://www.vevioz.com/**  
+**Create an account:** https://www.vevioz.com/register
+
 ## 🎵 Download Lagu MP3 — live consumer service
 
 Prefer a ready-to-use web experience instead of integrating the API yourself?
