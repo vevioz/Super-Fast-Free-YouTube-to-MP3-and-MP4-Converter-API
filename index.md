@@ -8,6 +8,10 @@ description: Official Vevioz MP3/MP4 downloader API integration examples for ifr
 
 The current Vevioz API is available at **[api.vevioz.com](https://api.vevioz.com/)**.
 
+## Vevioz Enterprise community
+
+Visit **[Vevioz Enterprise](https://www.vevioz.com/)** to join the main Vevioz social networking and digital community platform, or **[create an account](https://www.vevioz.com/register)**.
+
 ## Try the live consumer service
 
 **[Download Lagu MP3](https://download-lagu-mp3.com/)** is the ready-to-use Vevioz consumer downloader experience. Use it when you want the web interface without integrating the API yourself.
@@ -44,6 +48,7 @@ VeviozDownloadButton.bind(document.getElementById("download"), {
 - **[Open Vevioz Downloader API](https://api.vevioz.com/)**
 - **[Check API status](https://api.vevioz.com/status)**
 - **[Try Download Lagu MP3](https://download-lagu-mp3.com/)**
-- **[Visit Vevioz](https://www.vevioz.com/)**
+- **[Visit Vevioz Enterprise](https://www.vevioz.com/)**
+- **[Create a Vevioz account](https://www.vevioz.com/register)**
 
 For the latest integration instructions, examples, formats, and API behavior, use the official API website above.
